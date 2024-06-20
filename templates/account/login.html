@@ -1,0 +1,97 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@100&family=Oswald:wght@200&family=Pontano+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lusitana&family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@1,6..96&family=Manrope:wght@200&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D4C0AB;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh; 
+            margin: 0; 
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            min-height: 500px; /* Adjust the minimum height */
+            margin: 50px auto;
+            background-color: #FFFFFF;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .button {
+            background-color: #232D4B;
+            color: #FFFFFF;
+            padding: 10px 5px; /* Adjust the padding */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            margin-top: -10px;
+            width: 100px; /* Set a specific width */
+        }           
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        header {
+            background-color: #FFFFFF; /* Header background color */
+            color: #232D4B; /* Text color */
+            text-align: center;
+            padding: 35px;
+        }
+
+        h1 {
+            font-size: 3em; /* Adjust the font size */
+            margin-bottom: 10px;
+            margin-top: 6px;
+        }
+
+        h2 {
+        color: #8B98A3;
+        font-size: 22px;
+        font-family: 'Lato', sans-serif;
+        margin-bottom: 35px;
+        margin-top: 75px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <span style="font-size: 35px; font-family: Lato; color: #202E44; margin-bottom: 5px;">Welcome to the </span><br>
+                <span style="font-family: Bodoni Moda; color: #202E44; margin-bottom: 5px;">University of Virginia</span><br>
+                <span style="font-size: 35px; font-family: Lato; color: #202E44;">On Grounds Navigator</span>
+            </h1>
+        </header>
+        <h2>Sign In Using a Google Account:</h2>
+        <!-- <a class="button" href="{% provider_login_url "google" %}">Google</a> -->
+            <a class="button" style="font-family: Lato; font-size: 17px;" href="{% provider_login_url "google"%}">Google</a>
+        <form method="post">
+            {% csrf_token %}
+        </form>
+    </div>
+</body>
+</html>

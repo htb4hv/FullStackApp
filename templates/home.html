@@ -1,0 +1,607 @@
+<!-- templates/map.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"></head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@100&family=Oswald:wght@200&family=Pontano+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lusitana&family=Questrial&display=swap" rel="stylesheet">
+
+    <style>
+        a {
+            text-decoration: none;
+        }
+        .custom-navbar {
+            height:100px;
+            background-color: #FFFFFF
+        }
+        .custom2-navbar {
+            height:45px;
+            background-color: #FFFFFF
+        }
+
+        .custom-footer-bg {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            color: #FFFFFF;
+            font-family: 'Pontano Sans';
+            font-size: 16px;
+            background-color: #232D4B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+        }
+
+        .show-footer {
+            display: flex;
+        }
+
+        .dropdown {
+            position: fixed;
+            top: 35px;
+            right: 45px;
+            z-index: 999;
+            font-size: 25px; 
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            padding: 15px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            font-size: 20px;
+            font-family: 'Pontano Sans';
+        }
+
+        .dropdown-content a {
+            color: #232D4B;
+            padding: 8px 10px;
+            text-decoration: none;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            right: 0;
+        }
+
+        .review-dropdown {
+            position: fixed;
+            top: 35px;
+            right: 100px;
+            z-index: 999;
+            font-size: 25px; 
+        }
+
+        .left-dropdown {
+            position: fixed;
+            top: 35px;
+            left: 45px;
+            z-index: 999;
+            font-size: 25px;
+        }
+
+        .left-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            padding: 15px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            font-size: 20px;
+            font-family: 'Pontano Sans';
+        }
+
+        .left-dropdown-content a {
+            color: #232D4B;
+            padding: 6px 5px;
+            text-decoration: none;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .left-dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .left-dropdown:hover .left-dropdown-content {
+            display: block;
+            right: 1;
+        }
+        
+        .map-container {
+        height: 70vh;
+        }
+
+        .form-container {
+         height: 30vh;
+        }
+
+        #map {
+            width: 200%;
+            height: 500px;
+            border: 1px solid #232D4B;
+            margin: 40px auto;
+            border-radius: 8px;
+        }
+
+    .university-name {
+        font-size: 25px;
+        color: #232D4B;
+        margin-top: 32px;
+    }
+
+     body {
+        background-color: #FFFFFF;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .container {
+    background-color: #FFFFFF;
+    }
+
+    .container .navbar {
+    background-color: transparent;
+    }
+    
+        body,
+        body a,
+        body h1,
+        body h2,
+        body h3,
+        body h4,
+        body h5,
+        body h6,
+        body p,
+        body span,
+        body li,
+        body button,
+        body input,
+        body textarea,
+        body select {
+            color: #232D4B;
+        }
+
+
+        #locationForm {
+        margin-left: 10%;
+        width: 80%;
+        padding: 20px;
+        background-color: #AF9F8C;
+        border-radius: 6px;
+        }
+
+        #locationForm input,
+        #locationForm select,
+        #locationForm textarea,
+        #locationForm button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+
+        #locationForm button {
+            background-color: #232D4B;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding-top: 8px;
+        }
+
+        #locationForm button:hover {
+            background-color: #0055aa;
+        }
+
+        #locationForm::placeholder {
+        color: #FFFFFF;
+        opacity: 0.5; /* This will make the placeholder text slightly transparent */
+        }
+
+        #locationForm input,
+        #locationForm select,
+        #locationForm textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            color: #000; /* Updated to black color */
+        }
+
+        #locationForm option {
+            color: #000; /* This will make the dropdown option text black, so it's readable against a white background */
+        }
+
+        #image-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        #image-upload {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        #custom-button {
+            background-color: #232D4B;
+            color: #FFFFFF;
+            padding: 8px 10px; 
+            border-radius: 16px;
+            cursor: pointer;
+            display: inline-block;
+            align-items: center; 
+        }
+
+        #submit-container {
+            width: 100px; 
+            height: 30px;  /* Corrected height value */
+            display: flex; /* Added display: flex */
+            margin-top: 8px; 
+            justify-content: center;
+            align-items: center; 
+            text-align: center; /* Center text horizontally */
+            border-radius: 12px;
+        }
+
+        #submit-button {
+            width: 100px; 
+            height: 35px; 
+            margin-top: 8px; 
+        }
+
+
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="notifications" style="display: none;"></div>
+
+
+    {% if notifications %}
+    <div class="notifications">
+        {% for notification in notifications %}
+            <p>{{ notification.message }}</p>
+            <!-- Add logic to mark the notification as read when displayed -->
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <script>
+        // Access the Google Maps API key from the context
+        var googleMapsApiKey = "{{ google_maps_api_key }}";
+        var newLocation = undefined;
+
+        function loadMapScript() {
+            var script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + googleMapsApiKey + '&libraries=places&callback=initMap';
+            script.defer = true;
+            script.async = true;
+            script.onload = initMap;
+            document.head.appendChild(script);
+        }
+
+        loadMapScript();
+
+        function initMap() {
+            console.log("initMap is called");
+
+            var university = { lat: 38.033554, lng: -78.507980 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: university
+            });
+
+            $.get('/get_location/', function(response) {
+                var locations = response.locations;
+                for (var i = 0; i < locations.length; i++) {
+                    var location = locations[i];
+                    var position = { lat: location.latitude, lng: location.longitude };
+
+                    var marker = new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: location.TITLE + " - " + location.DESCRIPTION,
+                    });
+
+                    google.maps.event.addListener(marker, 'click', (function(location) {
+                        return function() {
+                            window.location.href = '/location_detail/' + location.id;
+                        }
+                    })(location));
+                }
+            });
+
+            {% if user.is_authenticated %}
+                google.maps.event.addListener(map, 'click', function(event) {
+                    newLocation = placeMarker(newLocation, event.latLng, map);
+                    console.log("Adding click event listener to the map");
+                    showForm(event.latLng);
+                });
+            {% endif %}
+        }
+
+
+        function placeMarker(marker, location, map) {
+            if (marker == undefined){
+                marker = new google.maps.Marker({
+                    position: location,
+                    map: map, 
+                });
+            }
+            else{
+                marker.setPosition(location);
+            }
+            return marker;
+        }
+
+        function showForm(latLng) {
+            console.log("Map clicked at:", latLng);  // Add this line
+            document.getElementById('latitude').value = latLng.lat();
+            document.getElementById('longitude').value = latLng.lng();
+            document.getElementById('locationForm').style.display = 'block';
+        }
+
+
+        function submitForm() {
+                var data = {
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    latlong: $('#latitude').val() + ',' + $('#longitude').val(),
+                    opentime: $('#opentime').val(),
+                    closetime: $('#closetime').val(),
+                    title: $('#title').val(),
+                    type: $('#type').val(),
+                    description: $('#description').val()
+                };
+
+                $.post('/save_location/', data, function(response) {
+                    $('#locationForm').hide();
+                    alert(response.message);
+                });
+        }
+
+        // checks if user scrolls to bottom of the page
+        document.addEventListener('DOMContentLoaded', function () {
+            var footer = document.getElementById('footer');
+            var scrollThreshold = 200; // Adjust this value as needed
+
+            function toggleFooter() {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - scrollThreshold) {
+                    footer.classList.add('show-footer');
+                } else {
+                    footer.classList.remove('show-footer');
+                }
+            }
+
+            window.addEventListener('scroll', toggleFooter);
+
+            // Initial check in case the page is loaded at the bottom
+            toggleFooter();
+        });
+
+        $(document).ready(function () {
+            $('.dropdown-toggle').dropdown();
+
+            $("#dropdown-icon").click(function () {
+                var dropdownContent = document.getElementById("dropdown-content");
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        });
+    </script>
+<head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg custom-navbar d-flex justify-content-between align-items-center">
+            <div class="text-center flex-grow-1 text-lg-center university-name">
+                UNIVERSITY of VIRGINIA
+            </div>
+            <div class="dropdown">
+                <i class="fas fa-user" id="dropdown-icon"></i>
+                <div class="dropdown-content" id="dropdown-content">
+                    {% if user.is_authenticated %}
+                        <a href="/accounts/logout/">Sign out</a>
+                    {% if is_site_admin %}
+                        <a href="{% url 'admin_dashboard_url' %}">Admin Dashboard</a>
+                    {% endif %}
+
+                    {% if not is_site_admin %}
+                        <a href="{% url 'notification_url' %}">Notifications</a>
+                    {% endif %}
+
+                    {% else %}
+                        <a href="/accounts/login/">Sign in</a>
+                    {% endif %}
+                    <a href="/admin/">Django Admin</a>
+                </div>
+            </div>         
+            <!--
+            <a href="/" class="review-dropdown">
+                <i class="fas fa-edit" id="review-dropdown-icon"></i>
+            </a>  
+            --> 
+            <div class="left-dropdown">
+                <i class="fas fa-bars" id="left-dropdown-icon"></i>
+                <div class="left-dropdown-content" id="left-dropdown-content">
+                    <a href="/restrooms/">Restrooms</a>
+                    <a href="/parking/">Parking Spots</a>
+                    <a href="/study/">Study Spots</a>
+                    <a href="/">All Locations</a>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg custom2-navbar">
+            <h1 style="color: #232D4B; font-family: 'Questrial'; font-size: 50px; margin-top: 0px; margin-bottom: 32px;" class="mx-auto fs-1">
+                <a href="/">On Grounds Navigator</a>
+            </h1>
+        </nav>
+    </div>
+
+<div id="map" style="width: 80%; height: 450px;"></div>
+
+<form id="locationForm" style="display: none; font-family: Questrial;" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" id="latitude" name="latitude" hidden>
+    <input type="text" id="longitude" name="longitude" hidden>
+    <input type="text" id="title" name="title" placeholder="Name of Location">
+    <select id="type" name="type">
+        <option value="restroom">Restroom</option>
+        <option value="parking">Parking Spot</option>
+        <option value="study">Study Spot</option>
+    </select>
+    <select id="opentime" name="time" placeholder="Opening Time">
+        <option value="" disabled selected>Opening Time</option>
+        <option value="12:00 AM">12:00 AM</option>
+        <option value="12:30 AM">12:30 AM</option>
+        <option value="1:00 AM">1:00 AM</option>
+        <option value="1:30 AM">1:30 AM</option>
+        <option value="2:00 AM">2:00 AM</option>
+        <option value="2:30 AM">2:30 AM</option>
+        <option value="3:00 AM">3:00 AM</option>
+        <option value="3:30 AM">3:30 AM</option>
+        <option value="4:00 AM">4:00 AM</option>
+        <option value="4:30 AM">4:30 AM</option>
+        <option value="5:00 AM">5:00 AM</option>
+        <option value="5:30 AM">5:30 AM</option>
+        <option value="6:00 AM">6:00 AM</option>
+        <option value="6:30 AM">6:30 AM</option>
+        <option value="7:00 AM">7:00 AM</option>
+        <option value="7:30 AM">7:30 AM</option>
+        <option value="8:00 AM">8:00 AM</option>
+        <option value="8:30 AM">8:30 AM</option>
+        <option value="9:00 AM">9:00 AM</option>
+        <option value="9:30 AM">9:30 AM</option>
+        <option value="10:00 AM">10:00 AM</option>
+        <option value="10:30 AM">10:30 AM</option>
+        <option value="11:00 AM">11:00 AM</option>
+        <option value="11:30 AM">11:30 AM</option>
+        <option value="12:00 PM">12:00 PM</option>
+        <option value="12:30 PM">12:30 PM</option>
+        <option value="1:00 PM">1:00 PM</option>
+        <option value="1:30 PM">1:30 PM</option>
+        <option value="2:00 PM">2:00 PM</option>
+        <option value="2:30 PM">2:30 PM</option>
+        <option value="3:00 PM">3:00 PM</option>
+        <option value="3:30 PM">3:30 PM</option>
+        <option value="5:00 PM">4:00 PM</option>
+        <option value="5:30 PM">4:30 PM</option>
+        <option value="5:00 PM">5:00 PM</option>
+        <option value="5:30 PM">5:30 PM</option>
+        <option value="6:00 PM">6:00 PM</option>
+        <option value="6:30 PM">6:30 PM</option>
+        <option value="7:00 PM">7:00 PM</option>
+        <option value="7:30 PM">7:30 PM</option>
+        <option value="8:00 PM">8:00 PM</option>
+        <option value="8:30 PM">8:30 PM</option>
+        <option value="9:00 PM">9:00 PM</option>
+        <option value="9:30 PM">9:30 PM</option>
+        <option value="10:00 PM">10:00 PM</option>
+        <option value="10:30 PM">10:30 PM</option>
+        <option value="11:00 PM">11:00 PM</option>
+        <option value="11:30 PM">11:30 PM</option>
+    </select>
+    <select id="closetime" name="time" placeholder="Closing Time">
+        <option value="" disabled selected>Closing Time</option>
+        <option value="12:00 AM">12:00 AM</option>
+        <option value="12:30 AM">12:30 AM</option>
+        <option value="1:00 AM">1:00 AM</option>
+        <option value="1:30 AM">1:30 AM</option>
+        <option value="2:00 AM">2:00 AM</option>
+        <option value="2:30 AM">2:30 AM</option>
+        <option value="3:00 AM">3:00 AM</option>
+        <option value="3:30 AM">3:30 AM</option>
+        <option value="4:00 AM">4:00 AM</option>
+        <option value="4:30 AM">4:30 AM</option>
+        <option value="5:00 AM">5:00 AM</option>
+        <option value="5:30 AM">5:30 AM</option>
+        <option value="6:00 AM">6:00 AM</option>
+        <option value="6:30 AM">6:30 AM</option>
+        <option value="7:00 AM">7:00 AM</option>
+        <option value="7:30 AM">7:30 AM</option>
+        <option value="8:00 AM">8:00 AM</option>
+        <option value="8:30 AM">8:30 AM</option>
+        <option value="9:00 AM">9:00 AM</option>
+        <option value="9:30 AM">9:30 AM</option>
+        <option value="10:00 AM">10:00 AM</option>
+        <option value="10:30 AM">10:30 AM</option>
+        <option value="11:00 AM">11:00 AM</option>
+        <option value="11:30 AM">11:30 AM</option>
+        <option value="12:00 PM">12:00 PM</option>
+        <option value="12:30 PM">12:30 PM</option>
+        <option value="1:00 PM">1:00 PM</option>
+        <option value="1:30 PM">1:30 PM</option>
+        <option value="2:00 PM">2:00 PM</option>
+        <option value="2:30 PM">2:30 PM</option>
+        <option value="3:00 PM">3:00 PM</option>
+        <option value="3:30 PM">3:30 PM</option>
+        <option value="5:00 PM">4:00 PM</option>
+        <option value="5:30 PM">4:30 PM</option>
+        <option value="5:00 PM">5:00 PM</option>
+        <option value="5:30 PM">5:30 PM</option>
+        <option value="6:00 PM">6:00 PM</option>
+        <option value="6:30 PM">6:30 PM</option>
+        <option value="7:00 PM">7:00 PM</option>
+        <option value="7:30 PM">7:30 PM</option>
+        <option value="8:00 PM">8:00 PM</option>
+        <option value="8:30 PM">8:30 PM</option>
+        <option value="9:00 PM">9:00 PM</option>
+        <option value="9:30 PM">9:30 PM</option>
+        <option value="10:00 PM">10:00 PM</option>
+        <option value="10:30 PM">10:30 PM</option>
+        <option value="11:00 PM">11:00 PM</option>
+        <option value="11:30 PM">11:30 PM</option>
+    </select>
+    <textarea id="description" name="description" placeholder="Write a Description"></textarea>
+    <!--
+    <div id="image-container">
+        <input type="file" id="image-upload" name="image" accept="image/*">
+        <label for="image-upload" id="custom-button">Upload an Image</label>
+    </div> 
+    -->
+    <div id="submit-container">
+        <button id="submit-button" onclick="submitForm()">Submit</button>
+    </div>
+    
+</form>
+<br>
+<br>
+<br>
+
+</body>
+<footer class="d-flex justify-content-center align-items-center text-lg-start" style="font-family: 'Pontano+Sans'; font-size: 16px; background-color: #232D4B; margin-top: auto; height: 70px;">     
+    <div class="text-center text-white p-4";>
+        © 2023 Copyright | All Rights Reserved
+    </div>
+</footer>
+
+</html>

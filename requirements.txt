@@ -1,0 +1,9 @@
+django-allauth-ui==0.1.4
+Django==4.2.5
+django-allauth==0.57.0
+django-heroku==0.3.1
+gunicorn==21.2.0
+virtualenv==20.24.5
+heroku==0.1.4
+python-decouple==3.5
+gunicorn==21.2.0

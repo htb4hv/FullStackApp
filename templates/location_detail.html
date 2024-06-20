@@ -1,0 +1,261 @@
+<!-- templates/location_detail.html -->
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lusitana&family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@1,6..96&family=Manrope:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@100&family=Oswald:wght@200&family=Pontano+Sans:wght@300&display=swap" rel="stylesheet">
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                background-color: #FFFFFF;
+            }
+
+            .back-button {
+                position: fixed;
+                color: #232D4B;
+                text-decoration: none;
+                font-size: 25px;
+                top: 35px;
+                left: 45px;
+            }
+
+            .rating-and-reviews {
+                position: absolute;
+                top: 50px;
+                right: 50px;
+                text-align: center;
+                margin-right: 50px;
+            }
+            .reviews-container {
+                display: flex;
+                justify-content: flex-start; 
+                align-items: center; 
+                height: -50vh; 
+                overflow-y: auto; 
+                margin-bottom: 100px;
+                margin-left: 25px;
+                margin-right: 25px;
+            }
+            .rating, .reviews-title {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            .rating-title {
+                font-family: 'Lato';
+                font-size: 20px;
+                color: #A49284;
+                margin-top: 5px;
+            }
+            .stars { 
+                /* overall rating stars */
+                color: #ccc;
+                margin-left: 5px;
+                font-size: 30px;
+            }
+            .content {
+                margin: auto;
+                width: 80%;
+                padding: 10px;
+            }
+            .images-placeholder {
+                font-weight: bold;
+                margin-top: 40px;
+                color: #555;
+            }
+            .review-form {
+                text-align: center;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #232D4B;
+                color: #FFFFFF;
+                width: 100%;
+                padding: 20px;
+                box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-direction: column;
+            }
+            .stars-input {
+                /* display: inline-block;
+                margin: 0 auto; */
+                display: flex;
+                justify-content: center; 
+                align-items: center;
+                margin-top: -5px;
+                margin-bottom: 1px;
+            }
+            .star {
+                /* user input stars */
+                font-size: 30px;
+                color: #FFFFFF;
+                cursor: pointer;
+                margin: 0 5px; 
+            }
+            .star.rated {
+                color: #ffd700;
+            }
+            .review-text {
+                width: 85%;
+                margin: 10px 0;
+                color: black;
+                height: 45px; 
+            }
+            .submit-review {
+                background-color: white;
+                color: #232D4B;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                font-family: 'Questrial';
+                margin-top: 8px;
+                margin-bottom: -2px;
+                font-size: 16px;
+            }
+
+            .reviews-section {
+                width: 100%;
+                max-width: none;
+                margin-bottom: 100px; 
+            }
+            .review {
+                background-color: #f0f0f0;
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+            .stars {
+                /* ensures overall rating is updated */
+                position: relative;
+                display: inline-block;
+                color: #ccc;
+            }
+            .half-star {
+                color: #ccc;
+            }
+            .half-star::after {
+                content: '★';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 50%;
+                overflow: hidden;
+                color: #ffd700;
+            }
+            .yellow-star {
+                color: #ffd700;
+            }
+
+            .p {
+                font-family: 'Questrial';
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+
+    </container>   
+        <title>Location Detail</title>
+        <div class="content">
+            <h1 style="font-family: 'Questrial'; font-size: 40px; margin-top: 32px; margin-bottom: 25px;">{{ location.TITLE }}</h1>
+            <p style="font-family: 'Questrial'; font-size: 18px;">Opening Time: {{ location.OPENTIME }}</p>
+            <p style="font-family: 'Questrial'; font-size: 18px;">Closing Time: {{ location.CLOSETIME }}</p>
+            <p style="font-family: 'Questrial'; font-size: 18px;">{{ location.DESCRIPTION }}</p>
+            <div id="map" style="width: 80%; height: -5px;"></div>
+        </div>
+    </container>
+    
+    <a href="/" class="back-button">
+        <i class="fas fa-arrow-left"></i> 
+    </a>  
+        <div class="rating-and-reviews">
+            <h1 class="rating-title">OVERALL RATING</h1>
+            <div class="rating">
+
+                {% for _ in full_stars %}
+                <span class="stars yellow-star">★</span>
+                {% endfor %}
+
+                {% if half_star %}
+                <span class="stars half-star">★</span>
+                {% endif %}
+
+                {% for _ in empty_stars %}
+                <span class="stars">★</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h1 style="font-family: 'Lato'; font-size: 20px; color: #A49284; margin-bottom: 20px;">REVIEWS</h1>
+        <div class="reviews-container">
+            <div class="reviews-section">
+                {% for review in reviews %}
+                <div class="review">
+                    <strong>{{ review.user.username }}</strong> - {{ review.rating }} stars
+                    <p>{{ review.review_text }}</p>
+                </div>
+                {% empty %}
+                <p style="font-family: 'Questrial'; font-size: 18px;">No reviews yet</p>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    <!-- Review Form -->
+    <form method="POST" action="{% url 'submit_review' location.id %}">
+        {% csrf_token %}
+        <div class="review-form">
+            <div class="stars-input">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <textarea class="review-text" name="review_text" placeholder="Leave a review" required></textarea>
+            <input type="hidden" name="rating" id="rating" value="0">
+            <button type="submit" class="submit-review">Submit Review</button>
+        </div>
+    </form>
+
+    <script>
+        // JavaScript for handling star rating input
+        document.addEventListener('DOMContentLoaded', function () {
+            var stars = document.querySelectorAll('.star');
+            stars.forEach(function(star) {
+                star.addEventListener('click', setRating);
+            });
+
+            function setRating(e) {
+                var rating = parseInt(e.target.dataset.value);
+                var stars = document.querySelectorAll('.star');
+                stars.forEach(function(star, index) {
+                    if (index < rating) {
+                        star.classList.add('rated');
+                    } else {
+                        star.classList.remove('rated');
+                    }
+                });
+                document.getElementById('rating').value = rating;
+            }
+        });
+        
+    </script>
+
+</body>
+</html>
